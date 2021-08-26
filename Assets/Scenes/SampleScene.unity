@@ -535,7 +535,7 @@ MonoBehaviour:
   - {fileID: 498993083}
   - {fileID: 1223935362}
   - {fileID: 1875872896}
-  _spawnDelay: 1
+  _spawnDelay: 0.1
   _wallet: {fileID: 1986003777}
 --- !u!4 &406626926
 Transform:
@@ -1369,7 +1369,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1034692245}
   - component: {fileID: 1034692244}
-  - component: {fileID: 1034692247}
   m_Layer: 0
   m_Name: CoinsSpawner
   m_TagString: Untagged
@@ -1415,19 +1414,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1034692247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034692243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fba8837730a22448bb2040ef4c3454cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _coinsSpawner: {fileID: 0}
 --- !u!1 &1044335584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +1711,7 @@ GameObject:
   - component: {fileID: 1149968917}
   - component: {fileID: 1149968916}
   - component: {fileID: 1149968919}
+  - component: {fileID: 1149968920}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1847,6 +1834,18 @@ MonoBehaviour:
   - {fileID: 1060044860}
   - {fileID: 140515680}
   _speed: 5
+--- !u!114 &1149968920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149968915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e617e078c0910477080c5fe33d8afb87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1154988318
 GameObject:
   m_ObjectHideFlags: 0
