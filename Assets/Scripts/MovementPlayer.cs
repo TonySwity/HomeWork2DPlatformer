@@ -23,16 +23,14 @@ public class MovementPlayer : MonoBehaviour
     {
         MovePlayer();
         Reflect();
-        Jump();
-        
-            
+        Jump();               
     }
 
     private void MovePlayer()
     {
         _moveVector.x = Input.GetAxis("Horizontal");
         _rigidbody2D.velocity = (new Vector2(_moveVector.x * _moveSpeed, _rigidbody2D.velocity.y));
-        _animator.SetFloat("moveX", Mathf.Abs(_moveVector.x));
+        _animator.SetFloat(AnimatorPlayerController.Params.MoveX, Mathf.Abs(_moveVector.x));
     }
 
     private void Reflect()
@@ -51,7 +49,7 @@ public class MovementPlayer : MonoBehaviour
             _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
 
         }
-        _animator.SetBool("isGround", _isGrounded);
+        _animator.SetBool(AnimatorPlayerController.Params.IsGround, _isGrounded);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
