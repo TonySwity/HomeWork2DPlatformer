@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private float _damage = -10f;
+
+    private void OnCollisionStay2D(Collision2D collision)
     {
         KillPlayer(collision);
     }
 
     private void KillPlayer(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Player>(out Player player))
+        if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth player))
         {
-            player.gameObject.SetActive(false);
+            player.TakeDamage(_damage);
         }
     }
 }
