@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class HealthPlayer : MonoBehaviour
 {
-    public delegate void HealthPlayerHandler(float newValueHealth, float damageOrHeal);
-    public event HealthPlayerHandler OnHealthValueChanged;
-    public delegate void PlayerIsAliveHandler(bool isAlive);
-    public event PlayerIsAliveHandler OnPlayerIsAliveValueChanged;
-
     [SerializeField] private float _maxHealth = 100f;
 
     private float _minHealth = 0f;
 
     public float Health { get; private set; }
     public bool IsAlive { get; private set; }
+
+    public delegate void HealthPlayerHandler(float newValueHealth, float damageOrHeal);
+    public event HealthPlayerHandler HealthValueChanged;
+    public delegate void PlayerIsAliveHandler();
+    public event PlayerIsAliveHandler Died;
 
     private void Awake()
     {
@@ -31,10 +31,10 @@ public class HealthPlayer : MonoBehaviour
             IsAlive = false;
             Debug.Log("Погиб");
 
-            OnPlayerIsAliveValueChanged?.Invoke(IsAlive);
+            Died?.Invoke();
         }
 
-        OnHealthValueChanged?.Invoke(Health, damage);
+        HealthValueChanged?.Invoke(Health, damage);
     }
 
     public void TakeHeal(float heal)
@@ -47,7 +47,7 @@ public class HealthPlayer : MonoBehaviour
         {
             Health += heal;
 
-            OnHealthValueChanged?.Invoke(Health, heal);
+            HealthValueChanged?.Invoke(Health, heal);
         }
     }
 }

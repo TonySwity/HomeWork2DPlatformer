@@ -9,8 +9,9 @@ public class HealthBarPlayer : MonoBehaviour
     [SerializeField] private Button _boardHealth;
     [SerializeField] private Text _boarfHealthText;
 
-    private Coroutine _setHealth;
     private float _maxHealth;
+
+    private Coroutine _setHealth;
 
     private void Start()
     {
@@ -21,25 +22,17 @@ public class HealthBarPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthPlayer.OnHealthValueChanged += OnHealthValueChanged;
-        _healthPlayer.OnPlayerIsAliveValueChanged += OnPlayerIsAliveValueChanged;
-    }
-
-    private void OnPlayerIsAliveValueChanged(bool isAlive)
-    {
-        if (!isAlive)
-        {
-            _boardHealth.image.color = Color.red;
-            _boarfHealthText.text = "Погиб";
-        }
+        _healthPlayer.HealthValueChanged += HealthValueChanged;
+        _healthPlayer.Died += Died;
     }
 
     private void OnDisable()
     {
-        _healthPlayer.OnHealthValueChanged -= OnHealthValueChanged;
+        _healthPlayer.HealthValueChanged -= HealthValueChanged;
+        _healthPlayer.Died -= Died;
     }
 
-    public void OnHealthValueChanged(float newValueHealth, float damageOrHeal)
+    private void HealthValueChanged(float newValueHealth, float damageOrHeal)
     {   
         if (_setHealth != null)
         {
@@ -48,7 +41,6 @@ public class HealthBarPlayer : MonoBehaviour
         else
         {
             _setHealth = StartCoroutine(SetHealth(newValueHealth, damageOrHeal));
-            _setHealth = null;
         }
     }
 
@@ -62,4 +54,9 @@ public class HealthBarPlayer : MonoBehaviour
         }
     }
 
+    private void Died()
+    {
+            _boardHealth.image.color = Color.red;
+            _boarfHealthText.text = "Погиб";
+    }
 }
