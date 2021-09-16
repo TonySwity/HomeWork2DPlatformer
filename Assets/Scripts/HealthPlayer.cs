@@ -1,34 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class HealthPlayer : MonoBehaviour
 {
     public delegate void HealthPlayerHandler(float newValueHealth, float damageOrHeal);
-    public event HealthPlayerHandler OnHealthValueChangedEvent;
+    public event HealthPlayerHandler OnHealthValueChanged;
+    public delegate void PlayerIsAliveHandler(bool isAlive);
+    public event PlayerIsAliveHandler OnPlayerIsAliveValueChanged;
 
     [SerializeField] private float _maxHealth = 100f;
 
     private float _minHealth = 0f;
 
     public float Health { get; private set; }
+    public bool IsAlive { get; private set; }
 
     private void Awake()
     {
+        IsAlive = true;
         Health = _maxHealth;
     }
 
-    private void Update()
-    {
-        Die();
-    }
 
     public void TakeDamage(float damage)
     { 
         Health -= damage;
 
-        OnHealthValueChangedEvent?.Invoke(Health, damage);
+        if (Health <= _minHealth)
+        {
+            gameObject.SetActive(false);
+            IsAlive = false;
+            Debug.Log("Погиб");
+
+            OnPlayerIsAliveValueChanged?.Invoke(IsAlive);
+        }
+
+        OnHealthValueChanged?.Invoke(Health, damage);
     }
 
     public void TakeHeal(float heal)
@@ -41,15 +47,7 @@ public class HealthPlayer : MonoBehaviour
         {
             Health += heal;
 
-            OnHealthValueChangedEvent?.Invoke(Health, heal);
-        }
-    }
-
-    private void Die()
-    {
-        if (Health <= _minHealth)
-        {
-            gameObject.SetActive(false);
+            OnHealthValueChanged?.Invoke(Health, heal);
         }
     }
 }

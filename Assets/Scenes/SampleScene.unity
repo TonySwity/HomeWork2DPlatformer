@@ -1657,7 +1657,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1857,14 +1857,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1986003778}
-        m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
-        m_MethodName: DamageCharacter
-        m_Mode: 1
+        m_TargetAssemblyTypeName: HealthPlayer, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 10
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2567,14 +2567,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1986003778}
-        m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
-        m_MethodName: HealCharacter
-        m_Mode: 1
+        m_TargetAssemblyTypeName: HealthPlayer, Assembly-CSharp
+        m_MethodName: TakeHeal
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 10
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -4425,13 +4425,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1986003770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a27e9eb947b54b57afbdbc12cd899b0, type: 3}
+  m_Script: {fileID: 11500000, guid: da10f815a5255499e9df58ab2cce0a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthSlider: {fileID: 882671247}
   _maxHealth: 100
-  _boardHealth: {fileID: 370419861}
-  _boardText: {fileID: 2030098919}
 --- !u!114 &1986003779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4769,6 +4766,7 @@ GameObject:
   - component: {fileID: 2033034918}
   - component: {fileID: 2033034917}
   - component: {fileID: 2033034916}
+  - component: {fileID: 2033034919}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -4859,6 +4857,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2033034919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033034914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa8ebe3c206f4a11afc9c37fe3d65ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthPlayer: {fileID: 1986003778}
+  _healthSlider: {fileID: 882671247}
+  _boardHealth: {fileID: 370419861}
+  _boarfHealthText: {fileID: 2030098919}
 --- !u!1 &2101542552
 GameObject:
   m_ObjectHideFlags: 0

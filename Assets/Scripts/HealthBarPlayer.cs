@@ -6,6 +6,8 @@ public class HealthBarPlayer : MonoBehaviour
 {
     [SerializeField] private HealthPlayer _healthPlayer;
     [SerializeField] private Slider _healthSlider;
+    [SerializeField] private Button _boardHealth;
+    [SerializeField] private Text _boarfHealthText;
 
     private Coroutine _setHealth;
     private float _maxHealth;
@@ -19,39 +21,45 @@ public class HealthBarPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthPlayer.OnHealthValueChangedEvent += OnHealthValueChanged;
+        _healthPlayer.OnHealthValueChanged += OnHealthValueChanged;
+        _healthPlayer.OnPlayerIsAliveValueChanged += OnPlayerIsAliveValueChanged;
+    }
+
+    private void OnPlayerIsAliveValueChanged(bool isAlive)
+    {
+        if (!isAlive)
+        {
+            _boardHealth.image.color = Color.red;
+            _boarfHealthText.text = "Погиб";
+        }
     }
 
     private void OnDisable()
     {
-        _healthPlayer.OnHealthValueChangedEvent -= OnHealthValueChanged;
+        _healthPlayer.OnHealthValueChanged -= OnHealthValueChanged;
     }
 
     public void OnHealthValueChanged(float newValueHealth, float damageOrHeal)
-    {
-        if (_setHealth == null)
-        {
-            _setHealth = StartCoroutine(SetHealth(newValueHealth, damageOrHeal));
-        }
-        else if (_setHealth != null)
+    {   
+        if (_setHealth != null)
         {
             StopCoroutine(_setHealth);
+        }
+        else
+        {
+            _setHealth = StartCoroutine(SetHealth(newValueHealth, damageOrHeal));
             _setHealth = null;
         }
     }
 
-
     private IEnumerator SetHealth(float newValue, float duration)
     {
-       
         while (_healthSlider.value != newValue)
         {
             _healthSlider.value = Mathf.MoveTowards(_healthSlider.value, newValue, duration * Time.deltaTime);
 
             yield return null;
         }
-
-        _setHealth = null;
     }
 
 }
