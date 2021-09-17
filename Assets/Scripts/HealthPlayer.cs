@@ -10,9 +10,9 @@ public class HealthPlayer : MonoBehaviour
     public bool IsAlive { get; private set; }
 
     public delegate void HealthPlayerHandler(float newValueHealth, float damageOrHeal);
-    public event HealthPlayerHandler OnHealthValueChanged;
+    public event HealthPlayerHandler HealthValueChanged;
     public delegate void PlayerIsAliveHandler();
-    public event PlayerIsAliveHandler OnDied;
+    public event PlayerIsAliveHandler Died;
 
     private void Awake()
     {

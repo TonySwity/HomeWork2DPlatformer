@@ -22,17 +22,17 @@ public class HealthBarPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthPlayer.OnHealthValueChanged += HealthValueChanged;
-        _healthPlayer.OnDied += Died;
+        _healthPlayer.HealthValueChanged += OnHealthValueChanged;
+        _healthPlayer.Died += OnDied;
     }
 
     private void OnDisable()
     {
-        _healthPlayer.OnHealthValueChanged -= HealthValueChanged;
-        _healthPlayer.OnDied -= Died;
+        _healthPlayer.HealthValueChanged -= OnHealthValueChanged;
+        _healthPlayer.Died -= OnDied;
     }
 
-    private void HealthValueChanged(float newValueHealth, float damageOrHeal)
+    private void OnHealthValueChanged(float newValueHealth, float damageOrHeal)
     {   
         if (_setHealth != null)
         {
@@ -54,7 +54,7 @@ public class HealthBarPlayer : MonoBehaviour
         }
     }
 
-    private void Died()
+    private void OnDied()
     {
             _boardHealth.image.color = Color.red;
             _boarfHealthText.text = "Погиб";
