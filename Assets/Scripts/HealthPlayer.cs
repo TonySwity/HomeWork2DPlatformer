@@ -10,9 +10,9 @@ public class HealthPlayer : MonoBehaviour
     public bool IsAlive { get; private set; }
 
     public delegate void HealthPlayerHandler(float newValueHealth, float damageOrHeal);
-    public event HealthPlayerHandler HealthValueChanged;
+    public event HealthPlayerHandler OnHealthValueChanged;
     public delegate void PlayerIsAliveHandler();
-    public event PlayerIsAliveHandler Died;
+    public event PlayerIsAliveHandler OnDied;
 
     private void Awake()
     {
@@ -31,10 +31,10 @@ public class HealthPlayer : MonoBehaviour
             IsAlive = false;
             Debug.Log("Погиб");
 
-            Died?.Invoke();
+            OnDied?.Invoke();
         }
 
-        HealthValueChanged?.Invoke(Health, damage);
+        OnHealthValueChanged?.Invoke(Health, damage);
     }
 
     public void TakeHeal(float heal)
@@ -47,7 +47,7 @@ public class HealthPlayer : MonoBehaviour
         {
             Health += heal;
 
-            HealthValueChanged?.Invoke(Health, heal);
+            OnHealthValueChanged?.Invoke(Health, heal);
         }
     }
 }

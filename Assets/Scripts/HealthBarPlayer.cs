@@ -22,14 +22,14 @@ public class HealthBarPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthPlayer.HealthValueChanged += HealthValueChanged;
-        _healthPlayer.Died += Died;
+        _healthPlayer.OnHealthValueChanged += HealthValueChanged;
+        _healthPlayer.OnDied += Died;
     }
 
     private void OnDisable()
     {
-        _healthPlayer.HealthValueChanged -= HealthValueChanged;
-        _healthPlayer.Died -= Died;
+        _healthPlayer.OnHealthValueChanged -= HealthValueChanged;
+        _healthPlayer.OnDied -= Died;
     }
 
     private void HealthValueChanged(float newValueHealth, float damageOrHeal)
