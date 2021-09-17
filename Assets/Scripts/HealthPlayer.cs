@@ -12,6 +12,7 @@ public class HealthPlayer : MonoBehaviour
 
     public delegate void HealthPlayerHandler(float newValueHealth, float damageOrHeal);
     public event HealthPlayerHandler HealthValueChanged;
+    //public event UnityAction<float, float> HealthValueChanged;
     public delegate void PlayerIsAliveHandler();
     public event PlayerIsAliveHandler Died;
 
@@ -20,7 +21,6 @@ public class HealthPlayer : MonoBehaviour
         IsAlive = true;
         Health = _maxHealth;
     }
-
 
     public void TakeDamage(float damage)
     { 
@@ -34,8 +34,12 @@ public class HealthPlayer : MonoBehaviour
 
             Died?.Invoke();
         }
+        else
+        {
+            HealthValueChanged?.Invoke(Health, damage);
+        }
+        Debug.Log("TakeDamage");
 
-        HealthValueChanged?.Invoke(Health, damage);
     }
 
     public void TakeHeal(float heal)
@@ -49,6 +53,8 @@ public class HealthPlayer : MonoBehaviour
             Health += heal;
 
             HealthValueChanged?.Invoke(Health, heal);
+            
         }
+        Debug.Log("TakeHeal");
     }
 }

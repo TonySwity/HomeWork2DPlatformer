@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 public class HealthBarPlayer : MonoBehaviour
 {
@@ -25,12 +24,14 @@ public class HealthBarPlayer : MonoBehaviour
     {
         _healthPlayer.HealthValueChanged += OnHealthValueChanged;
         _healthPlayer.Died += OnDied;
+        Debug.Log("OnEnable");
     }
 
     private void OnDisable()
     {
         _healthPlayer.HealthValueChanged -= OnHealthValueChanged;
         _healthPlayer.Died -= OnDied;
+        Debug.Log("OnDisable");
     }
 
     private void OnHealthValueChanged(float newValueHealth, float damageOrHeal)
@@ -39,11 +40,14 @@ public class HealthBarPlayer : MonoBehaviour
         {
             StopCoroutine(_setHealth);
             _setHealth = null;
+            Debug.Log("StopCoroutine");
         }
-        else
+        if(_setHealth == null) //  было else
         {
             _setHealth = StartCoroutine(SetHealth(newValueHealth, damageOrHeal));
+            Debug.Log("StartCoroutine");
         }
+        Debug.Log("OnHealthValueChanged");
     }
 
     private IEnumerator SetHealth(float newValue, float duration)
