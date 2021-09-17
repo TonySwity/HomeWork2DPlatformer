@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HealthPlayer : MonoBehaviour
 {
@@ -31,10 +32,10 @@ public class HealthPlayer : MonoBehaviour
             IsAlive = false;
             Debug.Log("Погиб");
 
-            OnDied?.Invoke();
+            Died?.Invoke();
         }
 
-        OnHealthValueChanged?.Invoke(Health, damage);
+        HealthValueChanged?.Invoke(Health, damage);
     }
 
     public void TakeHeal(float heal)
@@ -47,7 +48,7 @@ public class HealthPlayer : MonoBehaviour
         {
             Health += heal;
 
-            OnHealthValueChanged?.Invoke(Health, heal);
+            HealthValueChanged?.Invoke(Health, heal);
         }
     }
 }

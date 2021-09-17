@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class HealthBarPlayer : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class HealthBarPlayer : MonoBehaviour
         if (_setHealth != null)
         {
             StopCoroutine(_setHealth);
+            _setHealth = null;
         }
         else
         {
